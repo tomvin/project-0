@@ -15,7 +15,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    event.log(event);
+    console.log(event);
   }
 
   return (
