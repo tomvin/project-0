@@ -10,6 +10,7 @@ function App() {
   const [inputValue, setInputValue] = useState('dashorde');
   const [player, setPlayer] = useState('dashorde');
   const [gameRecords, setGameRecords] = useState([]);
+  const [error, setError] = useState();
 
   useEffect(() => {
     updateGameRecords(player);
@@ -17,6 +18,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setError();
     setPlayer(inputValue);
   };
 
@@ -27,6 +29,7 @@ function App() {
       const sortedRecords = records.sort((a, b) => b.winrate - a.winrate)
       setGameRecords(sortedRecords);
     } else {
+      setError('Player not found.')
       setGameRecords([]);
     }
   };
@@ -41,7 +44,9 @@ function App() {
           <input value={inputValue} className="form__input" type="text" onChange={handleInputChange} />
           <button className="form__button" type="submit">Check Player</button>
         </form>
-        <PlayedWithTable players={gameRecords} />
+        {
+          error ? <p className="error">{error}</p> : <PlayedWithTable players={gameRecords} />
+        }
       </header>
     </div>
   );
