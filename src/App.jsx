@@ -51,7 +51,7 @@ function App() {
 
   const updateGameRecords = (records) => {
     if (records) {
-      const sortedRecords = records.sort((a, b) => b.winrate - a.winrate)
+      const sortedRecords = records.sort((a, b) => b.gamesPlayed - a.gamesPlayed)
       setGameRecords(sortedRecords);
     } else {
       setError('Player not found.')
