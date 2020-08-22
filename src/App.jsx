@@ -23,11 +23,18 @@ function App() {
   const [player, setPlayer] = useState('dashorde');
   const [gameRecords, setGameRecords] = useState([]);
   const [error, setError] = useState();
-  const [searching, setSearching] = useState(false);
+  const [searching, setSearching] = useState(true);
 
   useEffect(() => {
-    getPlayerRecords(player).then(result => {
-      updateGameRecords(result[player]);
+    getPlayerRecords(player).then(({data}) => {
+      if (!data) {
+        setError('Player not found.');
+        setSearching(false);
+        setGameRecords([]);
+        return;
+      }
+
+      updateGameRecords(data[player]);
       setSearching(false);
     });
   }, [player]);
