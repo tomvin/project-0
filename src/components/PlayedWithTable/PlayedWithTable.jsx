@@ -8,7 +8,6 @@ const PlayedWithTable = ({ players }) => {
             <thead>
                 <tr>
                     <th>Summoner</th>
-                    <th>Games</th>
                     <th>Games Played</th>
                     <th>Wins</th>
                     <th>Losses</th>
@@ -17,13 +16,13 @@ const PlayedWithTable = ({ players }) => {
             </thead>
             <tbody>
                 {
-                    players.map(({ player, games, wins, losses, winRate }) => (
+                    players.map(({ player, games, wins, losses, winrate }) => (
                         <tr key={player}>
                             <td>{player}</td>
-                            <td>{games}</td>
-                            <td>{wins}</td>
-                            <td>{losses}</td>
-                            <td>{winRate}</td>
+                            <td className="align-right">{games}</td>
+                            <td className="align-right">{wins}</td>
+                            <td className="align-right">{losses}</td>
+                            <td className="align-right">{winrate}%</td>
                         </tr>
                     ))
                 }
