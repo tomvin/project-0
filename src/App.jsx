@@ -41,9 +41,12 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setError();
-    setSearching(true);
-    setPlayer(inputValue);
+    
+    if (player !== inputValue) {
+      setError();
+      setSearching(true);
+      setPlayer(inputValue);
+    }
   };
 
   const updateGameRecords = (records) => {
