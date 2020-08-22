@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import PlayedWithTable from './components/PlayedWithTable/PlayedWithTable';
 
@@ -9,25 +9,40 @@ const MOCK_DATA = {"dashorde": [{"player": "Dashorde", "games": "2", "wins": 1, 
 function App() {
   const [inputValue, setInputValue] = useState('dashorde');
   const [player, setPlayer] = useState('dashorde');
+  const [gameRecords, setGameRecords] = useState([]);
+
+  useEffect(() => {
+    updateGameRecords(player);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputValue);
-  }
+    setPlayer(inputValue);
+    updateGameRecords(inputValue)
+  };
 
-  const handleInputChange = (event) => {
-    console.log(event);
-  }; //setInputValue;
+  const updateGameRecords = (playerName) => {
+    const records = MOCK_DATA[playerName.toLowerCase()];
+
+    if (records) {
+      const sortedRecords = records.sort((a, b) => b.winrate - a.winrate)
+      setGameRecords(sortedRecords);
+    } else {
+      setGameRecords([]);
+    }
+  };
+
+  const handleInputChange = ({ target }) => setInputValue(target.value);
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Project 0</h1>
         <form onSubmit={handleSubmit} className="form">
-          <input className="form__input" type="text" onChange={handleInputChange} />
+          <input value={inputValue} className="form__input" type="text" onChange={handleInputChange} />
           <button className="form__button" type="submit">Check Player</button>
         </form>
-        <PlayedWithTable players={MOCK_DATA[player]} />
+        <PlayedWithTable players={gameRecords} />
       </header>
     </div>
   );
