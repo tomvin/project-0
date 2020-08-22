@@ -13,12 +13,11 @@ function App() {
 
   useEffect(() => {
     updateGameRecords(player);
-  }, []);
+  }, [player]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setPlayer(inputValue);
-    updateGameRecords(inputValue)
   };
 
   const updateGameRecords = (playerName) => {
