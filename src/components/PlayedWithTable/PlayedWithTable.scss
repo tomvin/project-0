@@ -1,17 +1,14 @@
 .table {
     th {
         padding: 16px;
-        padding-right: 56px;
         background: var(--main-bg-color-light);
-        position: relative;
-        text-align: left;
 
         .sort-span {
-            position: absolute;
-            right: 16px;
-            top: 24px;
-            vertical-align: middle;
-            font-size: 16px;
+            font-size: 14px;
+
+            &--hide {
+                visibility: hidden;
+            }
         }
     }
 
@@ -22,4 +19,29 @@
 
 .align-right {
     text-align: right;
+}
+
+.paging-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: var(--main-bg-color-light);
+    padding: 8px;
+    border-left: 2px solid var(--main-bg-color);
+    border-right: 2px solid var(--main-bg-color);
+}
+.paging-button {
+    border: none;
+    background-color: var(--pink);
+    color: white;
+    padding: 8px 16px;
+
+    &:disabled {
+        background-color: var(--main-bg-color);
+        color: #888888;
+    }
+}
+
+.paging-count {
+    margin: 0 16px;
 }
