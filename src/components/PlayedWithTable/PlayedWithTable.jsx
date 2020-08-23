@@ -68,7 +68,7 @@ const PlayedWithTable = ({ columns, data }) => {
                         {headerGroup.headers.map(column => (
                             // Add the sorting props to control sorting. For this example
                             // we can add them into the header props
-                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                            <th className={column.id} {...column.getHeaderProps(column.getSortByToggleProps())}>
                             <span>{column.render('Header')}</span>
                             {/* Add a sort direction indicator */}
                             <span className={`sort-span ${!column.isSorted ? 'sort-span--hide' : ''}`}>

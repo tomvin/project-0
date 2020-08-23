@@ -45,3 +45,9 @@
 .paging-count {
     margin: 0 16px;
 }
+
+// classes for columns. use same class name as column data name
+.player {
+    min-width: 160px;
+    text-align: left;
+}
