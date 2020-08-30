@@ -1,0 +1,10 @@
+.input {
+  padding: 9px;
+  border: 1px solid #fff;
+
+  &:focus {
+    border-color: var(--pink);
+    outline: var(--pink);
+    box-shadow: 0 0 11px var(--pink);
+  }
+}
