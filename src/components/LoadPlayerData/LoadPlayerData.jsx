@@ -7,6 +7,7 @@ import Input from '../Input/Input';
 
 const LoadPlayerData = ({ playerName, onLoadSuccess }) => {
   const [key, setKey] = useState(getApiKey());
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = ({ target }) => {
     const keyValue = target?.value;
@@ -16,8 +17,13 @@ const LoadPlayerData = ({ playerName, onLoadSuccess }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (loading) {
+      return;
+    }
 
+    setLoading(true);
     api.loadLatestGames(playerName, key).then(({data}) => {
+      setLoading(false);
       if (!data) {
         alert('Failed to load data');
         return;
@@ -26,13 +32,14 @@ const LoadPlayerData = ({ playerName, onLoadSuccess }) => {
       // alert('Success. Try searching again.');
       onLoadSuccess();
     }, (error) => {
+      setLoading(false);
       alert('Failed to load data', error);
     });
   };
 
   return (
     <div className="load-player-data">
-      <span className="info">Get latest game data for this player.</span>
+      <span className="info">Get latest game data for this player. Loading can take a while, check again in 30 minutes.</span>
       <form onSubmit={handleSubmit}>
         <label className="label" htmlFor="apikey">Riot API Key:</label>
         <Input id="apikey" type="text" value={key} onChange={handleInputChange}/>
